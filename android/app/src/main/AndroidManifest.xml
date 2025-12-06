@@ -36,6 +36,18 @@
          https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    
+    <!-- Permissões do aplicativo -->
+    
+    <!-- Para câmera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Para ler imagens (Android 13+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- Para compatibilidade com versões antigas (opcional) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
