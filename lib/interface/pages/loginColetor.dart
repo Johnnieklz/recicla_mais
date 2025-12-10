@@ -1,63 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:recicla_mais/interface/pages/coletas_disponiveis_page.dart';
 
 // pagina de login do usuario coletor
-import './loginColetor.dart';
-
-// pagina de login do usuario comum
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPageColetor extends StatefulWidget {
+  const LoginPageColetor({super.key});
 
   @override
+  State<LoginPageColetor> createState() => _LoginPageColetorState();
+}
+
+class _LoginPageColetorState extends State<LoginPageColetor> {
+  @override
   Widget build(BuildContext context) {
-    // estrutura da pagina de login do usuario comum
     return Scaffold(
-      drawerEnableOpenDragGesture: false,
+      appBar: AppBar(
+        backgroundColor: Colors.white,  
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        
+        // Padding lateral para dar espaço
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Center(
+          // Column organiza os widgets verticalmente
           child: Column(
+            // Estica os elementos para preencher a largura
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 80.0),
+            children: <Widget>[
+              // Espaçamento no topo
+              const SizedBox(height: 80.0), 
+              
+              // --- ♻️ 1. Logo/Imagem ---
               ClipOval(
-                child: Image.asset(
+                child:
+                 
+                 Image.asset(
                   'assets/imagens/logo.png',
                   height: 250, 
                   width: 250,// Controla a altura da imagem
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 48.0),
+              
+              const SizedBox(height: 16.0),
+              
+              // --- 📧 2. Campo de Email ---
               const Text('Email', style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8.0),
               const TextField(
                 decoration: InputDecoration(
-                  hintText: 'Digite o seu Email',
+                  hintText: 'Digite seu Email',
                   border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), // Ajuste o padding interno
+                  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 ),
               ),
-
+              
               const SizedBox(height: 24.0),
-
+              
+              // --- 🔒 3. Campo de Senha ---
               const Text('Senha', style: TextStyle(fontSize: 16)),
               const SizedBox(height: 8.0),
               const TextField(
-                obscureText: true, // Para esconder a senha
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Digite a sua senha',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 ),
               ),
-
+              
               const SizedBox(height: 8.0),
+              
+              // Link "Esqueceu a senha?" (alinhado à direita)
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    
                     // Lógica para recuperar a senha
                   },
                   child: const Text(
@@ -66,16 +84,22 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-
+              
               const SizedBox(height: 16.0),
+              
+              // --- ➡️ 4. Botão "Entrar" ---
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Lógica de login
+                    // Navega para a página de coletas, permitindo voltar.
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ColetasDisponiveisPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    // Cor de fundo do botão (azul na imagem)
                     backgroundColor: Colors.blue, 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
@@ -91,52 +115,13 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 30.0),
-
-              const Row(
-                children: <Widget>[
-                  Expanded(child: Divider(color: Colors.grey)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text('ou', style: TextStyle(color: Colors.grey)),
-                  ),
-                  Expanded(child: Divider(color: Colors.grey)),
-                ],
-              ),
-
-              const SizedBox(height: 30.0),
-
-              SizedBox(
-                height: 50,
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPageColetor(),
-                      ),
-                    );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    // Cor da borda
-                    side: const BorderSide(color: Colors.black, width: 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  child: const Text(
-                    'Usuário Coletor',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 40.0),
-
+              
+              // O elemento da linha divisória na sua imagem parece ser apenas um Divider solto:
+              const SizedBox(height: 24.0),
+              const Divider(color: Colors.grey),
+              const SizedBox(height: 80.0), // Espaçamento para empurrar o "Criar conta" para baixo
+              
+              // --- 📝 5. Link "Criar conta" ---
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -152,8 +137,10 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-
+              
+              // Espaçamento no rodapé
               const SizedBox(height: 20.0),
+              
             ],
           ),
         ),
